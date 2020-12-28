@@ -6,7 +6,17 @@ using System.Threading.Tasks;
 
 namespace Laba8_oop
 {
-    class Observer
+    public interface IObserver
     {
+        void onSubjectChanged(ISubject subject);
+    }
+
+    public interface ISubject
+    {
+        void addObserver(IObserver observer);
+
+        void removeObserver(IObserver observer);
+
+        void notifyEveryone();
     }
 }
