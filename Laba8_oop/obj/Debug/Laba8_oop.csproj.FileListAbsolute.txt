@@ -1,0 +1,9 @@
+C:\Users\Asus\source\repos\Laba8_oop\Laba8_oop\bin\Debug\Laba8_oop.exe.config
+C:\Users\Asus\source\repos\Laba8_oop\Laba8_oop\bin\Debug\Laba8_oop.exe
+C:\Users\Asus\source\repos\Laba8_oop\Laba8_oop\bin\Debug\Laba8_oop.pdb
+C:\Users\Asus\source\repos\Laba8_oop\Laba8_oop\obj\Debug\Laba8_oop.csprojAssemblyReference.cache
+C:\Users\Asus\source\repos\Laba8_oop\Laba8_oop\obj\Debug\Laba8_oop.Properties.Resources.resources
+C:\Users\Asus\source\repos\Laba8_oop\Laba8_oop\obj\Debug\Laba8_oop.csproj.GenerateResource.cache
+C:\Users\Asus\source\repos\Laba8_oop\Laba8_oop\obj\Debug\Laba8_oop.csproj.CoreCompileInputs.cache
+C:\Users\Asus\source\repos\Laba8_oop\Laba8_oop\obj\Debug\Laba8_oop.exe
+C:\Users\Asus\source\repos\Laba8_oop\Laba8_oop\obj\Debug\Laba8_oop.pdb
