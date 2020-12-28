@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Threading.Tasks;
 using System.IO;
-
 namespace Laba8_oop
 {
     public class CTriangle : Shape

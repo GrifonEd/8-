@@ -139,6 +139,7 @@ namespace Laba8_oop
                 it.getNode().key.draw(graphics, brush);
             }
         }
+
         public override void scale(int delta)
         {
             for (ContainerIterator it = shapes.Begin(); it != shapes.End(); ++it)

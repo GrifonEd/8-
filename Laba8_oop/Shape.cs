@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Threading.Tasks;
 using System.IO;
+
 namespace Laba8_oop
 {
     public abstract class Shape : ISerializable, ISubject, IObserver

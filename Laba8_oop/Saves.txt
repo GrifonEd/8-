@@ -1,0 +1,75 @@
+﻿C
+relocateFlag: False
+marked: False
+lastCommand: Constructor
+boarders:
+x: 1
+y: 1
+width: 467
+height: 335
+
+genLength: 35
+minGenLength: 5
+xCoord: 302
+yCoord: 79
+color: LightGreen
+C
+relocateFlag: False
+marked: True
+lastCommand: Constructor
+boarders:
+x: 1
+y: 1
+width: 467
+height: 335
+
+genLength: 35
+minGenLength: 5
+xCoord: 262
+yCoord: 205
+color: Yellow
+C
+relocateFlag: False
+marked: False
+lastCommand: Constructor
+boarders:
+x: 1
+y: 1
+width: 467
+height: 335
+
+genLength: 35
+minGenLength: 5
+xCoord: 145
+yCoord: 94
+color: White
+C
+relocateFlag: False
+marked: False
+lastCommand: Constructor
+boarders:
+x: 1
+y: 1
+width: 467
+height: 335
+
+genLength: 35
+minGenLength: 5
+xCoord: 212
+yCoord: 301
+color: White
+C
+relocateFlag: False
+marked: False
+lastCommand: Constructor
+boarders:
+x: 1
+y: 1
+width: 467
+height: 335
+
+genLength: 35
+minGenLength: 5
+xCoord: 115
+yCoord: 258
+color: Black

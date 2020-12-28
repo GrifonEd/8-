@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Laba8_oop
 {
@@ -20,8 +22,8 @@ namespace Laba8_oop
         int deltaX, deltaY;
         Button lastShapeButton;
         SolidBrush brush;
-        string pathToTheFileOfShapes = @"C:\Users\Asus\Desktop\Laba8_OOP\Saves.txt";
-        string pathToTheFileOfFormsParams = @"C:\Users\Asus\Desktop\Laba8_OOP\FormsParams.txt";
+        string pathToTheFileOfShapes = @"C:\Users\Asus\source\repos\Laba8_oop\Laba8_oop\Saves.txt";
+        string pathToTheFileOfFormsParams = @"C:\Users\Asus\source\repos\Laba8_oop\Laba8_oop\FormsParams.txt";
         private CustomTreeView treeView;
 
         public Form1()
