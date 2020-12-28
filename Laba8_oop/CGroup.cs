@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Laba8_oop
 {
@@ -136,5 +139,114 @@ namespace Laba8_oop
                 it.getNode().key.draw(graphics, brush);
             }
         }
+        public override void scale(int delta)
+        {
+            for (ContainerIterator it = shapes.Begin(); it != shapes.End(); ++it)
+            {
+                it.getNode().key.scale(delta);
+            }
+            lastCommand = "scale";
 
+            relocate();
+        }
+
+        public override void offset(int deltaX, int deltaY)
+        {
+            for (ContainerIterator it = shapes.Begin(); it != shapes.End(); ++it)
+            {
+                it.getNode().key.offset(deltaX, deltaY);
+            }
+            lastCommand = "offset";
+
+            relocate();
+        }
+
+        public override void fillPath()
+        {
+            for (ContainerIterator it = shapes.Begin(); it != shapes.End(); ++it)
+            {
+                it.getNode().key.fillPath();
+            }
+        }
+
+        protected override void relocate()
+        {
+            if (groupFlag == false)
+            {
+                while (!checkBoarders())
+                {
+                    RectangleF boundsRec = path.GetBounds();
+
+                    PointF left = boundsRec.Location;
+                    PointF right = new PointF(boundsRec.Right, boundsRec.Y);
+                    PointF bLeft = new PointF(boundsRec.X, boundsRec.Bottom);
+                    PointF bRight = new PointF(boundsRec.Right, boundsRec.Bottom);
+
+                    if (lastCommand == "offset")
+                    {
+                        if (!boarders.Contains(left) && !boarders.Contains(bLeft))
+                        {
+                            offset(1, 0);
+                        }
+
+                        if (!boarders.Contains(left) && !boarders.Contains(right))
+                        {
+                            offset(0, 1);
+                        }
+
+                        if (!boarders.Contains(right) && !boarders.Contains(bRight))
+                        {
+                            offset(-1, 0);
+                        }
+
+                        if (!boarders.Contains(bLeft) && !boarders.Contains(bRight))
+                        {
+                            offset(0, -1);
+                        }
+                    }
+                    else
+                    {
+                        scale(-1);
+                    }
+
+                    fillPath();
+                }
+
+            }
+        }
+
+
+        public bool addShape(Shape newShape)
+        {
+            if (count >= maxCount)
+            {
+                return false;
+            }
+
+            newShape.setGroupFlag(true);
+            shapes.Push_back(newShape);
+            count++;
+            return true;
+        }
+
+        public Container split()
+        {
+            for (ContainerIterator it = shapes.Begin(); it != shapes.End(); ++it)
+            {
+                it.getNode().key.setGroupFlag(false);
+            }
+
+            return shapes;
+        }
+
+
+        ~CGroup()
+        {
+            for (ContainerIterator it = shapes.Begin(); it != shapes.End(); ++it)
+            {
+                it.getNode().key = null;
+            }
+            --ID;
+        }
     }
+}

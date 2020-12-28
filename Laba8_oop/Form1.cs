@@ -246,4 +246,209 @@ namespace Laba8_oop
 
             this.Invalidate();
         }
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.A:
+                    deltaX = 0;
+                    break;
+                case Keys.D:
+                    deltaX = 0;
+                    break;
+                case Keys.W:
+                    deltaY = 0;
+                    break;
+                case Keys.S:
+                    deltaY = 0;
+                    break;
+                case Keys.ControlKey:
+                    {
+                        isControlPressed = false;
+                        break;
+                    }
+            }
+        }
+
+        private void btn_Click(object sender, EventArgs e)
+        {
+            lastShapeButton.Enabled = true;
+            (sender as Button).Enabled = false;
+            lastShapeButton = (sender as Button);
+        }
+
+        private void btnColor_Click(object sender, EventArgs e)
+        {
+            switch ((sender as Button).Text)
+            {
+                case "Черный":
+                    {
+                        brush = new SolidBrush(Color.Black);
+                        break;
+                    }
+                case "Белый":
+                    {
+                        brush = new SolidBrush(Color.White);
+                        break;
+                    }
+                case "Зеленый":
+                    {
+                        brush = new SolidBrush(Color.LightGreen);
+                        break;
+                    }
+                case "Жёлтый":
+                    {
+                        brush = new SolidBrush(Color.Yellow);
+                        break;
+                    }
+            }
+            this.Invalidate();
+        }
+
+
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            switch ((sender as Button).Text)
+            {
+                case "Черный":
+                    {
+                        brush = new SolidBrush(Color.Black);
+                        break;
+                    }
+                case "Белый":
+                    {
+                        brush = new SolidBrush(Color.White);
+                        break;
+                    }
+                case "Зеленый":
+                    {
+                        brush = new SolidBrush(Color.LightGreen);
+                        break;
+                    }
+                case "Жёлтый":
+                    {
+                        brush = new SolidBrush(Color.Yellow);
+                        break;
+                    }
+            }
+            this.Invalidate();
+        }
+
+        private void contextMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            if (e.ClickedItem.Text == "Группировка")
+            {
+                CGroup group = new CGroup(100, boarders);
+                bool IsThereSomething = false;
+                ContainerIterator it = container.Begin();
+                while (it != container.End())
+                {
+                    if (it.getNode().key.getMarked() == true && !(it.getNode().key is StickyRectangle))
+                    {
+                        IsThereSomething = true;
+                        group.addShape(it.getNode().key);
+                        container.Remove(it.getNode().key);
+                        if (container.Count() != 0)
+                        {
+                            it = container.Begin();
+                        }
+                        else
+                        {
+                            it = container.End();
+                        }
+                    }
+                    else
+                    {
+                        it++;
+                    }
+                }
+
+                if (IsThereSomething)
+                {
+                    container.Push_back(group);
+                }
+                return;
+            }
+
+            if (e.ClickedItem.Text == "Разгруппировать")
+            {
+                Container extractedShapes = new Container();
+                for (ContainerIterator it = container.Begin(); it != container.End(); ++it)
+                {
+                    if (it.getNode().key.getMarked() == true && (it.getNode().key is CGroup))
+                    {
+                        Container shapes = ((CGroup)it.getNode().key).split();
+                        for (ContainerIterator it2 = shapes.Begin(); it2 != shapes.End(); ++it2)
+                        {
+                            extractedShapes.Push_back(it2.getNode().key);
+                        }
+                        container.Remove(it.getNode().key);
+                    }
+                }
+
+                for (ContainerIterator it = extractedShapes.Begin(); it != extractedShapes.End(); ++it)
+                {
+                    container.Push_back(it.getNode().key);
+                }
+
+                return;
+            }
+
+            if (e.ClickedItem.Text == "Сохранить")
+            {
+                container.saveShapes(pathToTheFileOfShapes);
+                using (StreamWriter writer = new StreamWriter(pathToTheFileOfFormsParams, false, System.Text.Encoding.Default))
+                {
+                    this.save(writer);
+                }
+                return;
+            }
+
+            if (e.ClickedItem.Text == "Загрузить")
+            {
+                using (StreamReader reader = new StreamReader(pathToTheFileOfFormsParams, System.Text.Encoding.Default))
+                {
+                    this.load(reader);
+                }
+
+                ShapeFactory factory = new MyShapeFactory();
+                treeView.removeObserver(container);
+                container = new Container();
+                container.addObserver(treeView);
+                treeView.addObserver(container);
+                container.loadShapes(pathToTheFileOfShapes, factory);
+                this.Invalidate();
+            }
+        }
+
+
+        private void treeView_AfterCheck(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            string str = e.Node.Text;
+            string[] arr = str.Split(' ');
+            treeView.selectedNode = int.Parse(arr[0]);
+
+            TreeNode currentNode = e.Node;
+            Color currentColor;
+
+            if (currentNode.ForeColor == Color.Black)
+            {
+                currentColor = Color.Red;
+            }
+            else
+            {
+                currentColor = Color.Black;
+            }
+
+            while (currentNode.Parent != null)
+            {
+                currentNode = currentNode.Parent;
+            }
+
+            treeView.paintBranch(currentNode, currentColor);
+            treeView.notifyEveryone();
+        }
+
     }
+}
